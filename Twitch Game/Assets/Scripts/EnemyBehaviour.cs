@@ -25,10 +25,21 @@ public class EnemyBehaviour : MonoBehaviour {
 	}
 
     public void Damage(float damage) {
+        print(health);
         this.health -= damage;
+        print(health);
         if (health <= 0.0f) {
             Destroy(gameObject);
             GameManager.instance.DeleteEnemy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        print("hit");
+        if (other.transform.tag == "Bullet") {
+            print("hit enemy");
+            Damage(other.gameObject.GetComponent<BulletBehaviour>().GetDamage());
+            Destroy(other.gameObject);
         }
     }
 }

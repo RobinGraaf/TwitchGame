@@ -26,11 +26,7 @@ public class BulletBehaviour : MonoBehaviour {
         this.damage = damage;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.transform.tag == "Enemy")
-        {
-            other.gameObject.GetComponent<EnemyBehaviour>().Damage(damage);
-            Destroy(gameObject);
-        }
+    public float GetDamage() {
+        return this.damage;
     }
 }

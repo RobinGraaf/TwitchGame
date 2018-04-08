@@ -33,13 +33,9 @@ public class TowerBehaviour : MonoBehaviour {
         foreach (GameObject enemy in enemies)
         {
             float dist = Vector3.Distance(this.transform.position, enemy.transform.position);
-            print(dist);
             if (dist < closestDistance)
             {
-                print(closestDistance);
-                print(dist);
                 closestDistance = dist;
-                print(closestDistance);
                 closestEnemy = enemy;
             }
         }
