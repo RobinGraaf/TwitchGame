@@ -1,45 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour {
+public class EnemyBehaviour : MonoBehaviour
+{
+	private GameObject _target;
+	private float _health, _damage, _speed;
 
-    GameObject target;
-    float health, damage, speed;
+	private Rigidbody _rb;
+	private Transform _castle;
 
-    Rigidbody rb;
-    Transform castle;
+	private GameManager _gameManager;
+
+	private void Awake()
+	{
+		_gameManager = GameManager.Instance();
+	}
+
 	// Use this for initialization
-	void Start () {
-        health = 20;
-        damage = 10;
-        speed = 4;
+	private void Start()
+	{
+		_health = 20;
+		_damage = 10;
+		_speed = 4;
 
-        castle = GameObject.FindWithTag("Castle").transform;
+		_castle = GameObject.FindWithTag("Castle").transform;
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, castle.position, step);
+	private void Update()
+	{
+		var step = _speed * Time.deltaTime;
+		transform.position = Vector3.MoveTowards(transform.position, _castle.position, step);
 	}
 
-    public void Damage(float damage) {
-        print(health);
-        this.health -= damage;
-        print(health);
-        if (health <= 0.0f) {
-            Destroy(gameObject);
-            GameManager.instance.DeleteEnemy(gameObject);
-        }
-    }
+	public void Damage(float damage)
+	{
+		print(_health);
+		_health -= damage;
+		print(_health);
+		if (_health <= 0.0f)
+		{
+			Destroy(gameObject);
+			_gameManager.DeleteEnemy(gameObject);
+		}
+	}
 
-    private void OnCollisionEnter(Collision other) {
-        print("hit");
-        if (other.transform.tag == "Bullet") {
-            print("hit enemy");
-            Damage(other.gameObject.GetComponent<BulletBehaviour>().GetDamage());
-            Destroy(other.gameObject);
-        }
-    }
+	private void OnCollisionEnter(Collision other)
+	{
+		print("hit");
+		if (other.transform.tag == "Bullet")
+		{
+			print("hit enemy");
+			Damage(other.gameObject.GetComponent<BulletBehaviour>().GetDamage());
+			Destroy(other.gameObject);
+		}
+	}
 }

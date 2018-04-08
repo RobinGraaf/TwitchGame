@@ -1,32 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour {
+public class BulletBehaviour : MonoBehaviour
+{
+	private GameObject _target;
+	private float _speed;
+	private float _damage;
+	private float _lifespan;
+	private float _lifetime;
 
-    GameObject target;
-    float speed;
-    float damage;
-
-    private void Start() {
-        speed = 7.5f;
-    }
-
-    // Update is called once per frame
-    void Update () {
-        float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, step);
+	private void Start()
+	{
+		_speed = 7.5f;
+		_lifespan = 10f;
+		_lifetime = 0;
 	}
 
-    public void SetTarget(GameObject target) {
-        this.target = target;
-    }
+	// Update is called once per frame
+	private void Update()
+	{
+		_lifetime += Time.deltaTime;
+		if (_lifetime >= _lifespan)
+		{
+			Destroy(gameObject);
+		}
+		if (_target)
+		{
+			var step = _speed * Time.deltaTime;
+			transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, step);
+		}
+	}
 
-    public void SetDamage(float damage) {
-        this.damage = damage;
-    }
+	public void SetTarget(GameObject target)
+	{
+		this._target = target;
+	}
 
-    public float GetDamage() {
-        return this.damage;
-    }
+	public void SetDamage(float damage)
+	{
+		this._damage = damage;
+	}
+
+	public float GetDamage()
+	{
+		return _damage;
+	}
 }

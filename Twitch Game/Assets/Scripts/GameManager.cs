@@ -1,50 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+public class GameManager : Singleton<GameManager>
+{
+	private string _username, _password;
+	private List<GameObject> _enemyList;
 
-public class GameManager : MonoBehaviour {
+	private void Start()
+	{
+		_enemyList = new List<GameObject>();
+	}
 
-    public static GameManager instance = null;
-    string username, password;
-    List<GameObject> enemyList;
+	public void SetInfo(string username, string password)
+	{
+		_username = username;
+		_password = password;
+	}
 
-    private void Awake() {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != null)
-        {
-            Destroy(this);
-        }
+	public string GetUsername()
+	{
+		return _username;
+	}
 
-        DontDestroyOnLoad(this);
-        enemyList = new List<GameObject>();
-    }
+	public string GetPassword()
+	{
+		return _password;
+	}
 
-    public void SetInfo(string username, string password) {
-        this.username = username;
-        this.password = password;
-    }
+	public List<GameObject> GetEnemies()
+	{
+		return _enemyList;
+	}
 
-    public string GetUsername() {
-        return this.username;
-    }
+	public void AddEnemy(GameObject enemy)
+	{
+		_enemyList.Add(enemy);
+	}
 
-    public string GetPassword() {
-        return this.password;
-    }
-
-    public List<GameObject> GetEnemies() {
-        return this.enemyList;
-    }
-
-    public void AddEnemy(GameObject enemy) {
-        enemyList.Add(enemy);
-    }
-
-    public void DeleteEnemy(GameObject enemy) {
-        enemyList.Remove(enemy);
-    }
+	public void DeleteEnemy(GameObject enemy)
+	{
+		_enemyList.Remove(enemy);
+	}
 }

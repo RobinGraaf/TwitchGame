@@ -1,20 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour {
+public class MenuManager : MonoBehaviour
+{
+	[SerializeField]
+	private InputField _usernameField, _passwordField;
 
-    [SerializeField] InputField usernameField, passwordField;
+	private GameManager _gameManager;
+
+	private void Awake()
+	{
+		_gameManager = GameManager.Instance();
+	}
 
 	// Use this for initialization
-	public void StartGame () {
-        string username = usernameField.text;
-        string password = passwordField.text;
+	public void StartGame()
+	{
+		var username = _usernameField.text == "" ? _gameManager.GetUsername() : _usernameField.text;
+		var password = _passwordField.text == "" ? _gameManager.GetPassword() : _passwordField.text;
 
-        GameManager.instance.SetInfo(username, password);
+		_gameManager.SetInfo(username, password);
 
-        SceneManager.LoadScene(1);
-    }
+		SceneManager.LoadScene(1);
+	}
 }

@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Loader : MonoBehaviour {
-
-    public GameObject gameManager;
-
-    private void Awake()
-    {
-        if (GameManager.instance == null)
-        {
-            Instantiate(gameManager);
-        }
-    }
+public class Loader : MonoBehaviour
+{
+	private void Awake()
+	{
+		GameManager.Instance();
+#if UNITY_EDITOR
+		var testUser = new GameObject();
+		testUser.AddComponent<TestUserLogin>();
+		Destroy(testUser);
+#endif
+	}
 }

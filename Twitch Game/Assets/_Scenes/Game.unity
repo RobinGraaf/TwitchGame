@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55967851d6ca5044b85bd40a40913b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 202140816}
-  enemyPrefab: {fileID: 1694786978292300, guid: eb178e28866d578449a1d691a3422a8c,
+  EnemySpawner: {fileID: 202140816}
+  EnemyPrefab: {fileID: 1694786978292300, guid: eb178e28866d578449a1d691a3422a8c,
     type: 2}
 --- !u!4 &399061973
 Transform:
@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 535865009}
   - component: {fileID: 535865008}
   - component: {fileID: 535865007}
+  - component: {fileID: 535865011}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -330,6 +331,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!114 &535865011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 535865006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37635fd4871bd8c40bef5597883d5a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &754349824
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8464530e9af5df44a1a844fb60ab422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 1652193096912128, guid: b738e168beecc2746adebdb4a68c498e, type: 2}
+  _tower: {fileID: 1652193096912128, guid: b738e168beecc2746adebdb4a68c498e, type: 2}
 --- !u!4 &1041923687
 Transform:
   m_ObjectHideFlags: 0
