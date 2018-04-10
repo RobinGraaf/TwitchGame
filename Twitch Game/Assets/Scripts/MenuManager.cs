@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
 	[SerializeField]
-	private InputField _usernameField, _passwordField;
+	private InputField _usernameField;
 
 	private GameManager _gameManager;
 
@@ -17,11 +18,12 @@ public class MenuManager : MonoBehaviour
 	// Use this for initialization
 	public void StartGame()
 	{
-		var username = _usernameField.text == "" ? _gameManager.GetUsername() : _usernameField.text;
-		var password = _passwordField.text == "" ? _gameManager.GetPassword() : _passwordField.text;
+		_gameManager.Channel = _usernameField.text;
+		StartCoroutine(LoadScene());
+	}
 
-		_gameManager.SetInfo(username, password);
-
-		SceneManager.LoadScene(1);
+	private IEnumerator LoadScene()
+	{
+		yield return SceneManager.LoadSceneAsync(1);
 	}
 }

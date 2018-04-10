@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-public class TwitchChat : MonoBehaviour
+public class TwitchChat : Singleton<TwitchChat>
 {
+	private bool _isInitializing = false;
+	private bool _isInitialized = false;
+
 	private TcpClient _twitchClient;
 	private StreamReader _reader;
 	private StreamWriter _writer;
 
-	private string _username, _channelName, _chatMessagePrefix; //Get the password from https://twitchapps.com/tmi
-	private string _channel, _password;
+	private string _username, _channel, _password, _chatMessagePrefix;
 	private DateTime _lastMessageSendtime;
 
-	public GameObject EnemySpawner;
+	private GameObject _enemySpawner;
 	public GameObject EnemyPrefab;
 
 	private Queue<string> _sendMessageQueue;
@@ -25,32 +29,50 @@ public class TwitchChat : MonoBehaviour
 	private void Awake()
 	{
 		_gameManager = GameManager.Instance();
-		_channel = _gameManager.GetUsername();
-		_password = _gameManager.GetPassword();
 	}
 
 	private void Start()
 	{
 		_sendMessageQueue = new Queue<string>();
-		_username = _channel.ToLower();
-		_channelName = _username;
-		_chatMessagePrefix = string.Format(":{0}!{0}@{0}.tmi.twitch.tv PRIVMSG #{1} :", _username, _channelName);
-
-		Connect();
 	}
 
-	private void SendTwitchMessage(string message)
+	private IEnumerator Initialize()
 	{
-		//SendTwitchMessage(String.Format("Hello, {0}", speaker));
+		_isInitializing = true;
+		_channel = _gameManager.Channel;
+		_username = "pixelsrealmtowerdefense";
+		_password = "oauth:7e7ld6w6sgcazxq9srtwlsh283vu4h";
+		_chatMessagePrefix = string.Format(":{0}!{0}@{0}.tmi.twitch.tv PRIVMSG #{1} :", _username, _channel);
+		while (_twitchClient == null || !_twitchClient.Connected)
+		{
+			Connect();
+			yield return 0;
+		}
+		SendTwitchMessage("Game Started");
+		_isInitializing = false;
+		_isInitialized = true;
+	}
+
+	public void SendTwitchMessage(string message)
+	{
 		_sendMessageQueue.Enqueue(message);
 	}
 
 	private void Update()
 	{
-		if (!_twitchClient.Connected)
+		if (!_isInitialized)
 		{
-			Connect();
+			if (!_isInitializing && SceneManager.GetActiveScene().buildIndex > 0)
+				StartCoroutine(Initialize());
+			return;
 		}
+		if (_isInitializing)
+		{
+			return;
+		}
+
+		if (!_enemySpawner)
+			_enemySpawner = GameObject.FindWithTag("Enemy Spawner");
 
 		TryReceivingMessages();
 		TrySendingMessages();
@@ -64,8 +86,7 @@ public class TwitchChat : MonoBehaviour
 		_writer.AutoFlush = true;
 
 		_writer.WriteLine("PASS {0}\r\nNICK {1}\r\nUSER {1} 8 * :{1}", _password, _username);
-		//writer.WriteLine("CAP REQ :twitch.tv/membership");
-		_writer.WriteLine("JOIN #" + _channelName);
+		_writer.WriteLine("JOIN #" + _channel);
 		_lastMessageSendtime = DateTime.Now;
 	}
 
@@ -97,16 +118,16 @@ public class TwitchChat : MonoBehaviour
 
 	private void ReceiveMessage(string speaker, string message)
 	{
-		print(string.Format("\r\n{0}: {1}", speaker, message));
+		Debug.LogFormat("Received message: {0}: {1}", speaker, message);
 
 		if (message.ToLower().Contains("!spawn "))
 		{
 			if (message.ToLower().Contains("enemy"))
 			{
 				float spawnOffset = 10;
-				var posX = EnemySpawner.transform.position.x;
+				var posX = _enemySpawner.transform.position.x;
 				var spawnX = Random.Range(posX - spawnOffset, posX + spawnOffset);
-				var spawnPosition = new Vector3(spawnX, EnemySpawner.transform.position.y + 0.5f, EnemySpawner.transform.position.z);
+				var spawnPosition = new Vector3(spawnX, _enemySpawner.transform.position.y + 0.5f, _enemySpawner.transform.position.z);
 				var enemy = Instantiate(EnemyPrefab, spawnPosition, Quaternion.identity);
 				_gameManager.AddEnemy(enemy);
 			}
@@ -122,6 +143,7 @@ public class TwitchChat : MonoBehaviour
 				var message = _sendMessageQueue.Dequeue();
 				_writer.WriteLine("{0}{1}", _chatMessagePrefix, message);
 				_lastMessageSendtime = DateTime.Now;
+				Debug.Log("Sent Message: " + message);
 			}
 		}
 	}

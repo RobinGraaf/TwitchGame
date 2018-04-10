@@ -3,28 +3,23 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+	public string Username { get; set; }
+
+	public string Password { get; set; }
+
+	private string _channel;
+	public string Channel
+	{
+		get { return _channel; }
+		set { _channel = value.ToLower(); }
+	}
+
 	private string _username, _password;
 	private List<GameObject> _enemyList;
 
 	private void Start()
 	{
 		_enemyList = new List<GameObject>();
-	}
-
-	public void SetInfo(string username, string password)
-	{
-		_username = username;
-		_password = password;
-	}
-
-	public string GetUsername()
-	{
-		return _username;
-	}
-
-	public string GetPassword()
-	{
-		return _password;
 	}
 
 	public List<GameObject> GetEnemies()
