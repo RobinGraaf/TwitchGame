@@ -7,6 +7,7 @@ public class PlayerTowerPlacement : MonoBehaviour
 
     [SerializeField] private GameObject _placeableObjectPrefab;
     [SerializeField] private KeyCode _newObjectHotkey;
+    [SerializeField] private float _spawnDistance;
     private GameObject _currentPlaceableObject;
     private float _mouseWheelRotation;
 
@@ -41,9 +42,8 @@ public class PlayerTowerPlacement : MonoBehaviour
     {
         Vector3 playerPos = transform.position;
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 2.0f;
 
-        Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
+        Vector3 spawnPos = playerPos + playerDirection * _spawnDistance;
         spawnPos.y = 1.0f;
         _currentPlaceableObject.transform.position = spawnPos;
     }
@@ -56,9 +56,8 @@ public class PlayerTowerPlacement : MonoBehaviour
             {
                 Vector3 playerPos = transform.position;
                 Vector3 playerDirection = transform.forward;
-                float spawnDistance = 2.0f;
 
-                Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
+                Vector3 spawnPos = playerPos + playerDirection * _spawnDistance;
                 spawnPos.y = 1.0f;
                 _currentPlaceableObject = Instantiate(_placeableObjectPrefab, spawnPos, Quaternion.identity);
             }
