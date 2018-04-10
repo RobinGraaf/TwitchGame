@@ -5,11 +5,47 @@ public class GameManager : Singleton<GameManager>
 {
 	private string _username, _password;
 	private List<GameObject> _enemyList;
+    private bool _paused;
+    [SerializeField] private GameObject _playerPrefab;
 
 	private void Start()
 	{
 		_enemyList = new List<GameObject>();
-	}
+
+        // ONLY FOR TESTING
+        // SHOULD HAPPEN ONLY WHEN GOING TO GAME FROM MENU
+	    Instantiate(_playerPrefab, new Vector3(0, 1, -15), Quaternion.identity);
+        Cursor.lockState = CursorLockMode.Locked;
+	    Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_paused)
+            {
+                _paused = false;
+                Time.timeScale = 1;
+
+                GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = true;
+                GameObject.FindWithTag("MainCamera").GetComponent<MouseLook>().enabled = true;
+                
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                _paused = true;
+                Time.timeScale = 0;
+                GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = false;
+                GameObject.FindWithTag("MainCamera").GetComponent<MouseLook>().enabled = false;
+                
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+    }
 
 	public void SetInfo(string username, string password)
 	{

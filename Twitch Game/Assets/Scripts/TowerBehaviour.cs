@@ -4,9 +4,9 @@ using UnityEngine;
 public class TowerBehaviour : MonoBehaviour
 {
 	private List<GameObject> _enemies;
-	[SerializeField]
-	private GameObject _bulletPrefab;
+	[SerializeField] private GameObject _bulletPrefab;
 	private float _timer, _interval;
+    [SerializeField] private float _towerRange;
 
 	private GameManager _gameManager;
 
@@ -21,13 +21,13 @@ public class TowerBehaviour : MonoBehaviour
 		_enemies = _gameManager.GetEnemies();
 		_timer = 0.0f;
 		_interval = 3.0f;
-	}
+	    _towerRange = 20.0f;
+    }
 
 	// Update is called once per frame
 	private void Update()
 	{
 		_timer += Time.deltaTime;
-		// TODO: Add interval
 		if (_timer >= _interval)
 		{
 			_timer = 0;
@@ -53,7 +53,7 @@ public class TowerBehaviour : MonoBehaviour
 			}
 		}
 
-		if (closestDistance <= 20.0f)
+		if (closestDistance <= _towerRange)
 		{
 			ShootAt(closestEnemy);
 		}

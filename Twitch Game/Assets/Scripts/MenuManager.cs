@@ -21,7 +21,10 @@ public class MenuManager : MonoBehaviour
 		var password = _passwordField.text == "" ? _gameManager.GetPassword() : _passwordField.text;
 
 		_gameManager.SetInfo(username, password);
+        
+	    Cursor.lockState = CursorLockMode.Locked;
+	    Cursor.visible = false;
 
-		SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
 	}
 }
