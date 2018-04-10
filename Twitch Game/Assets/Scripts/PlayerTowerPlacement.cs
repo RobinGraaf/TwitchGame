@@ -6,7 +6,7 @@ public class PlayerTowerPlacement : MonoBehaviour
 {
 
     [SerializeField] private GameObject _placeableObjectPrefab;
-    [SerializeField] private KeyCode _newObjectHotkey = KeyCode.Tab;
+    [SerializeField] private KeyCode _newObjectHotkey;
     private GameObject _currentPlaceableObject;
     private float _mouseWheelRotation;
 
