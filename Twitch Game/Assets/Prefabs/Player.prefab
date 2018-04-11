@@ -184,6 +184,7 @@ MonoBehaviour:
   _placeableObjectPrefab: {fileID: 1392140608302062, guid: fe987e2c1cb819b40a6906ba93b5b356,
     type: 2}
   _newObjectHotkey: 9
+  _spawnDistance: 2.5
 --- !u!114 &114524023143409514
 MonoBehaviour:
   m_ObjectHideFlags: 1

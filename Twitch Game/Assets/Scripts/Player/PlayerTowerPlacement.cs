@@ -28,7 +28,11 @@ public class PlayerTowerPlacement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _currentPlaceableObject = null;
+            if (MapData.Instance().GetTileAt((int) _currentPlaceableObject.transform.position.x,
+                    (int) _currentPlaceableObject.transform.position.z) == 2)
+            {
+                _currentPlaceableObject = null;
+            }
         }
     }
 
@@ -44,8 +48,7 @@ public class PlayerTowerPlacement : MonoBehaviour
         Vector3 playerDirection = transform.forward;
 
         Vector3 spawnPos = playerPos + playerDirection * _spawnDistance;
-        spawnPos.y = 1.0f;
-        _currentPlaceableObject.transform.position = spawnPos;
+        _currentPlaceableObject.transform.position = MapData.Instance().GetClosestNode(spawnPos);
     }
 
     private void PlaceNewObject()
@@ -58,7 +61,6 @@ public class PlayerTowerPlacement : MonoBehaviour
                 Vector3 playerDirection = transform.forward;
 
                 Vector3 spawnPos = playerPos + playerDirection * _spawnDistance;
-                spawnPos.y = 1.0f;
                 _currentPlaceableObject = Instantiate(_placeableObjectPrefab, spawnPos, Quaternion.identity);
             }
             else

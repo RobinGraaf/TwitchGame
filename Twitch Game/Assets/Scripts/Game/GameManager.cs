@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
 
         // ONLY FOR TESTING
         // SHOULD HAPPEN ONLY WHEN GOING TO GAME FROM MENU
-	    Instantiate(_playerPrefab, new Vector3(0, 1, -15), Quaternion.identity);
+        Instantiate(_playerPrefab, GameObject.FindWithTag("Castle").transform.position + (Vector3.forward * 4), Quaternion.identity);
         Cursor.lockState = CursorLockMode.Locked;
 	    Cursor.visible = false;
     }
