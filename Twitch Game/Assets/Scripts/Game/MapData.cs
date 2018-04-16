@@ -59,7 +59,7 @@ public class MapData : Singleton<MapData>
     {
         if (_mapData[Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z)] == (int) Area.EPlayer)
         {
-            return _nodes[Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z) ] + Vector3.up;
+            return _nodes[Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z)];
         }
         else return position;
     }

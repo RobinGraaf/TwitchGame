@@ -18,8 +18,8 @@ public class BulletBehaviour : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		_lifetime += Time.deltaTime;
-		if (_lifetime >= _lifespan)
+	    _lifetime += Time.deltaTime;
+		if (_lifetime >= _lifespan || _target == null)
 		{
 			Destroy(gameObject);
 		}

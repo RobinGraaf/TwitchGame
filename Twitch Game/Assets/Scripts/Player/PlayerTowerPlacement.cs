@@ -31,6 +31,8 @@ public class PlayerTowerPlacement : MonoBehaviour
             if (MapData.Instance().GetTileAt((int) _currentPlaceableObject.transform.position.x,
                     (int) _currentPlaceableObject.transform.position.z) == 2)
             {
+                _currentPlaceableObject.transform.position =
+                    MapData.Instance().GetClosestNode(_currentPlaceableObject.transform.position);
                 _currentPlaceableObject = null;
             }
         }
@@ -48,7 +50,7 @@ public class PlayerTowerPlacement : MonoBehaviour
         Vector3 playerDirection = transform.forward;
 
         Vector3 spawnPos = playerPos + playerDirection * _spawnDistance;
-        _currentPlaceableObject.transform.position = MapData.Instance().GetClosestNode(spawnPos);
+        _currentPlaceableObject.transform.position = MapData.Instance().GetClosestNode(spawnPos) + Vector3.up/2;
     }
 
     private void PlaceNewObject()

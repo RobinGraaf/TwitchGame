@@ -20,7 +20,7 @@ public class TowerBehaviour : MonoBehaviour
 	{
 		_enemies = _gameManager.GetEnemies();
 		_timer = 0.0f;
-		_interval = 3.0f;
+		_interval = 1.5f;
 	    _towerRange = 20.0f;
     }
 
@@ -62,7 +62,7 @@ public class TowerBehaviour : MonoBehaviour
 	private void ShootAt(GameObject closest)
 	{
 		transform.LookAt(closest.transform);
-		var bullet = Instantiate(_bulletPrefab, new Vector3(transform.position.x, 1.5f, transform.position.z), Quaternion.identity);
+		var bullet = Instantiate(_bulletPrefab, new Vector3(GetComponentInChildren<Transform>().position.x, GetComponentInChildren<Transform>().position.y, GetComponentInChildren<Transform>().position.z), Quaternion.identity);
 		bullet.GetComponent<BulletBehaviour>().SetTarget(closest);
 		bullet.GetComponent<BulletBehaviour>().SetDamage(10.0f);
 	}
