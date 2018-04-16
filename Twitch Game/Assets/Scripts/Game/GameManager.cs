@@ -6,17 +6,17 @@ public class GameManager : Singleton<GameManager>
 	private string _username, _password;
 	private List<GameObject> _enemyList;
     private bool _paused;
-    [SerializeField] private GameObject _playerPrefab;
+    //[SerializeField] private GameObject _playerPrefab;
 
-	private void Start()
+    private void Start()
 	{
 		_enemyList = new List<GameObject>();
 
         // ONLY FOR TESTING
         // SHOULD HAPPEN ONLY WHEN GOING TO GAME FROM MENU
-        Instantiate(_playerPrefab, GameObject.FindWithTag("Castle").transform.position + (Vector3.forward * 4), Quaternion.identity);
-        Cursor.lockState = CursorLockMode.Locked;
-	    Cursor.visible = false;
+     //   Instantiate(_playerPrefab, GameObject.FindWithTag("Castle").transform.position + (Vector3.forward * 4), Quaternion.identity);
+     //   Cursor.lockState = CursorLockMode.Locked;
+	    //Cursor.visible = false;
     }
 
     private void Update()

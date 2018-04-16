@@ -18,6 +18,8 @@ public class MapGraphics : MonoBehaviour {
     private int _playerAreaSizeZ;
 
     private enum Area { EPlayer, EEnemy }
+    
+    [SerializeField] private GameObject _playerPrefab;
 
     // Use this for initialization
     void Start ()
@@ -112,6 +114,13 @@ public class MapGraphics : MonoBehaviour {
         //            Quaternion.identity);
         //    }
         //}
+
+        AddGameObject();
+    }
+
+    private void AddGameObject()
+    {
+        Instantiate(_playerPrefab, GameObject.FindWithTag("Castle").transform.position + (Vector3.forward * 4), Quaternion.identity);
     }
 
     private Color[][] ChopUpTiles()
