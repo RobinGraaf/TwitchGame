@@ -238,12 +238,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1368229029532404}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787c7f5c393447b40a30fbf9f875f34e, type: 3}
+  m_Script: {fileID: 11500000, guid: 048e598b08bc0774eb2add88bd1b5a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 1083000039392626, guid: 8d2d2faef666b1441983b858b50c9923,
     type: 2}
-  _towerRange: 35
 --- !u!135 &135095608175476322
 SphereCollider:
   m_ObjectHideFlags: 1

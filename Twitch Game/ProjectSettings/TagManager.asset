@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SpawnArea
   - Enemy
   - Castle
   - Bullet
   - Enemy Spawner
+  - Ground
   layers:
   - Default
   - TransparentFX
