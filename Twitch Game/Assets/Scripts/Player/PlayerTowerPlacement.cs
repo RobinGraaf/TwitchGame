@@ -24,17 +24,19 @@ public class PlayerTowerPlacement : MonoBehaviour
     private void ReleaseCurrentPlaceableObject()
     {
         if (Input.GetKeyDown(_placeObjectKey))
+        {
             Vector3 currentPos = _currentPlaceableObject.transform.position;
             MapData.Tile tile = MapData.Instance().GetTileAt((int) currentPos.x, (int) currentPos.z);
             if (tile.Type == 2 && !tile.IsUsed)
             {
-                var newPosition = MapData.Instance().GetClosestNode(_currentPlaceableObject.transform.position);
+                Vector3 newPosition = MapData.Instance().GetClosestNode(_currentPlaceableObject.transform.position);
                 newPosition.y = 0.5f;
 
                 _currentPlaceableObject.transform.position = newPosition;
                 _currentPlaceableObject = null;
-               tile.IsUsed = true;
+                tile.IsUsed = true;
             }
+        }
     }
 
     private void RotateCurrentPlaceableObject()

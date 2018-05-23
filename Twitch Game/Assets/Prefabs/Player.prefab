@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 20521336412875344}
   - component: {fileID: 124039727911575878}
   - component: {fileID: 81874955375777646}
+  - component: {fileID: 114874268458201740}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -42,6 +43,7 @@ GameObject:
   - component: {fileID: 54660136079455558}
   - component: {fileID: 114988007889875940}
   - component: {fileID: 114080292538924960}
+  - component: {fileID: 114067847288699946}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -169,6 +171,24 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081961365801862}
   m_Enabled: 1
+--- !u!114 &114067847288699946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179240034843564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ac1cdeabc4d5c49a711ffd7f9b0a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 1
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!114 &114080292538924960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +205,24 @@ MonoBehaviour:
   _newObjectkey: 330
   _placeObjectKey: 331
   _spawnDistance: 2.5
+--- !u!114 &114874268458201740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081961365801862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ac1cdeabc4d5c49a711ffd7f9b0a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axes: 2
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!114 &114988007889875940
 MonoBehaviour:
   m_ObjectHideFlags: 1
