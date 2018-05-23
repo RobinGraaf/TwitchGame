@@ -57,9 +57,9 @@ public class MapData : Singleton<MapData>
 
     public Vector3 GetClosestNode(Vector3 position)
     {
-        if (_mapData[Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z)] == (int) Area.EPlayer)
+        if (_mapData[Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z)] == (int) Area.EPlayer)
         {
-            return _nodes[Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z)];
+            return _nodes[Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z)];
         }
         else return position;
     }

@@ -5,7 +5,7 @@ public class TowerBehaviour : MonoBehaviour
 {
 	private List<GameObject> _enemies;
 	[SerializeField] private GameObject _bulletPrefab;
-	private float _timer, _interval;
+	private float _timer, _interval, _health;
     [SerializeField] private float _towerRange;
 
 	private GameManager _gameManager;

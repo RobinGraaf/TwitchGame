@@ -26,16 +26,11 @@ public class GameManager : Singleton<GameManager> {
                 _paused = false;
                 Time.timeScale = 1;
 
-                GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = true;
-                GameObject.FindWithTag("MainCamera").GetComponent<MouseLook>().enabled = true;
-
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             } else {
                 _paused = true;
                 Time.timeScale = 0;
-                GameObject.FindWithTag("Player").GetComponent<MouseLook>().enabled = false;
-                GameObject.FindWithTag("MainCamera").GetComponent<MouseLook>().enabled = false;
 
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;

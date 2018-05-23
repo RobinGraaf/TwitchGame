@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "SpawnArea")
+        if (other.gameObject.tag == "Ground")
         {
             _isJumping = false;
         }
