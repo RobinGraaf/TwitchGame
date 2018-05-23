@@ -43,15 +43,4 @@ public class EnemyBehaviour : MonoBehaviour
 			_gameManager.DeleteEnemy(gameObject);
 		}
 	}
-
-	private void OnCollisionEnter(Collision other)
-	{
-		print("hit");
-		if (other.transform.tag == "Bullet")
-		{
-			print("hit enemy");
-			Damage(other.gameObject.GetComponent<BulletBehaviour>().GetDamage());
-			Destroy(other.gameObject);
-		}
-	}
 }

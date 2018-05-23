@@ -95,7 +95,7 @@ public class MapGraphics : MonoBehaviour {
 
         for (int y = 0; y < _sizeZ; y++) {
             for (int x = 0; x < _sizeX; x++) {
-                Color[] color = tiles[MapData.Instance().GetTileAt(x, y)];
+                Color[] color = tiles[MapData.Instance().GetTileAt(x, y).Type];
                 texture.SetPixels(x * _tileResolution, y * _tileResolution, _tileResolution, _tileResolution, color);
             }
         }

@@ -24,21 +24,23 @@ public class PlayerTowerPlacement : MonoBehaviour
     private void ReleaseCurrentPlaceableObject()
     {
         if (Input.GetKeyDown(_placeObjectKey))
-            if (MapData.Instance().GetTileAt(Mathf.FloorToInt(_currentPlaceableObject.transform.position.x),
-                    Mathf.FloorToInt(_currentPlaceableObject.transform.position.z)) == 2)
+            Vector3 currentPos = _currentPlaceableObject.transform.position;
+            MapData.Tile tile = MapData.Instance().GetTileAt((int) currentPos.x, (int) currentPos.z);
+            if (tile.Type == 2 && !tile.IsUsed)
             {
                 var newPosition = MapData.Instance().GetClosestNode(_currentPlaceableObject.transform.position);
                 newPosition.y = 0.5f;
 
                 _currentPlaceableObject.transform.position = newPosition;
                 _currentPlaceableObject = null;
+               tile.IsUsed = true;
             }
     }
 
     private void RotateCurrentPlaceableObject()
     {
-        _mouseWheelRotation += Input.mouseScrollDelta.y;
-        _currentPlaceableObject.transform.Rotate(Vector3.up, _mouseWheelRotation * 10.0f);
+        _mouseWheelRotation = Input.mouseScrollDelta.y;
+        _currentPlaceableObject.transform.Rotate(Vector3.up, _mouseWheelRotation * 90.0f); // Rotate 90 degrees on every mousewheel tick
     }
 
     private void MoveCurrentPlaceableObject()
