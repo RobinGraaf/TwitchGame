@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private readonly List<GameObject> _enemies;
+    private List<GameObject> _enemies;
     protected enum Effects { ENone, EPoison, EBurn, EFreeze }
 
     protected float Health { get; set; }
@@ -21,8 +21,6 @@ public class Tower : MonoBehaviour
 
     public Tower()
     {
-        _enemies = GameManager.Instance().GetEnemies();
-
         Health = 20.0f;
         Damage = 10.0f;
         Range = 30.0f;
@@ -33,7 +31,12 @@ public class Tower : MonoBehaviour
         Effect = (int)Effects.ENone;
     }
 
-    private void Update() {
+	private void Awake()
+	{
+        _enemies = GameManager.Instance().GetEnemies();
+	}
+
+	private void Update() {
        ShootInterval();
     }
 
